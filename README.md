@@ -11,6 +11,10 @@ package directory.
 
 ## mail2html
 
-Simple tool to convert a mail message to HTML with fallback to text.
+A tool to convert a mail message to HTML with fallback to text.
+
+## gopastebin
+
+A tool to send text from stdin to pastebin.com.
 
 /Calle
