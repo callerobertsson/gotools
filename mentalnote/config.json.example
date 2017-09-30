@@ -1,0 +1,6 @@
+{
+	"api-token": "Go to the Slack integrations and get the API token."
+	"channel-id": "Find in the Slack API Tester by running the channels.list command.",
+	"username": "Put any name here or leave it blank for the default name bot.",
+	"icon-url": "An URL to an avatar image or blank for default."
+}
