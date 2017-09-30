@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/callerobertsson/gohuman/human"
+	"github.com/callerobertsson/gotools/gohuman/human"
 )
 
 var (
