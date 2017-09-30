@@ -1,0 +1,7 @@
+#!/bin/bash
+# Call gopastebin with user key and expiration 1 day, pass along other args as well
+# Your pastebin user/developer key can be found on https://pastebin.com/api
+#
+
+gopastebin -k "<YOUR_PASTEBIN_KEY>" -x "1D" $@
+
