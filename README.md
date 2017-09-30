@@ -4,7 +4,7 @@ _A small collection of Golang tools._
 
 Some recreational Golang coding projects I implemented for fun or gain.
 
-Moved them here form miscellanous location to keep the in one place.
+Moved them here from miscellanous locations to keep the in one place.
 
 For me they are useful but do expect to encounter some bugs if you try
 them out.
