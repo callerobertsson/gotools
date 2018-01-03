@@ -29,7 +29,7 @@ func main() {
 	path := os.Getenv("PATH")
 	paths := strings.Split(path, ":")
 
-	verbose("Looping $PATH searching for executable %q", arg)
+	verbose("Looping $PATH searching for executable %q\n", arg)
 
 	which(arg, paths)
 }
