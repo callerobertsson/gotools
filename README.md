@@ -12,6 +12,17 @@ them out.
 I have tested them on Mac OS and Arch Linux but there might be problems
 running them on Windows.
 
+## chkpath
+
+Iterates the PATH variable and checks if each path is readable, a
+directory, and contains executable files.
+
+## ghich
+
+Searches the path to find first (default) or all (-a) occurences of an
+executable file like the `which` linux command. Reports inconcistencies
+in the path as a bonus.
+
 ## gohuman
 
 Command line tool for converting long numbers (int64) to human readable
