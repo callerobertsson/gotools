@@ -29,7 +29,16 @@ func main() {
 
 func checkPaths(paths []string) {
 
+	done := map[string]bool{}
+
 	for _, path := range paths {
+
+		if _, ok := done[path]; ok {
+			out(path, "duplicate")
+			continue
+		}
+
+		done[path] = true
 
 		// Open path
 		dir, err := os.Open(path)
@@ -70,6 +79,7 @@ func checkPaths(paths []string) {
 		if !hasExecutable {
 			out(path, "contains no executables")
 		}
+
 	}
 }
 
