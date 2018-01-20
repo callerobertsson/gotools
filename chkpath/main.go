@@ -9,11 +9,13 @@ import (
 )
 
 var (
-	helpFlag bool
+	helpFlag    bool
+	verboseFlag bool
 )
 
 func main() {
 	flag.BoolVar(&helpFlag, "h", false, "show usage info and exit")
+	flag.BoolVar(&verboseFlag, "v", false, "print verbose info")
 	flag.Parse()
 
 	path := os.Getenv("PATH")
@@ -76,18 +78,26 @@ func checkPaths(paths []string) {
 			}
 		}
 
+		// Print message if no executables in dir
 		if !hasExecutable {
 			out(path, "contains no executables")
+			continue
 		}
 
+		// Print ok if verbose mode
+		if verboseFlag {
+			out(path, "ok")
+		}
 	}
 }
 
+// out prints path and a message
 func out(p string, m string) {
 	fmt.Printf("%v - %v\n", p, m)
 }
 
+// usage prints usage information
 func usage() {
-	fmt.Println("Synopsis: chkpath [-h] [-v] [-a] <command_name>")
+	fmt.Println("Synopsis: chkpath [-h] [-v]")
 	flag.PrintDefaults()
 }
