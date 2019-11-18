@@ -18,6 +18,7 @@ var (
 	basePath       string = "."
 	onlyGitDirs    bool
 	onlyNonGitDirs bool
+	pullAll        bool
 	recursive      bool
 	silent         bool
 )
@@ -25,6 +26,7 @@ var (
 func init() {
 	flag.BoolVar(&onlyGitDirs, "g", false, "Only show git directories")
 	flag.BoolVar(&onlyNonGitDirs, "G", false, "Only show non-git directories")
+	flag.BoolVar(&pullAll, "p", false, "Execute pull in all git directories")
 	flag.BoolVar(&recursive, "r", false, "Search git dirs in subdirectories")
 	flag.BoolVar(&silent, "s", false, "Only print paths (and prefix if not -g or -G)")
 
@@ -68,6 +70,13 @@ func gitDirs(d string) {
 
 		switch {
 		case isGit && !onlyNonGitDirs:
+			if pullAll {
+				status, err := gitPull(path)
+				if err != nil {
+					fmt.Printf("Error: %v\n", err)
+				}
+				fmt.Printf("%s%s\n", gitPrefix, status)
+			}
 			branch := ""
 			status := ""
 			if !silent {
@@ -101,6 +110,16 @@ func isGitDir(path string) bool {
 	}
 
 	return false
+}
+
+func gitPull(p string) (string, error) {
+
+	cmd := exec.Command("git", "pull")
+	cmd.Dir = p
+
+	bs, _ := cmd.CombinedOutput()
+
+	return string(bs), nil
 }
 
 func gitStatus(p string) (branch, status string) {
