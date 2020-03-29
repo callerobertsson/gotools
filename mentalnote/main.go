@@ -4,6 +4,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"os"
 	"os/user"
 
@@ -20,9 +22,10 @@ const (
 
 // Command line flags and options
 var (
-	flagConfig  string
-	flagMessage string
-	optionList  bool
+	flagConfig    string
+	flagMessage   string
+	optionList    bool
+	optionVerbose bool
 )
 
 func init() {
@@ -30,6 +33,8 @@ func init() {
 	flag.StringVar(&flagConfig, "c", "", "config file path")
 	flag.BoolVar(&optionList, "l", false, "list messages")
 	flag.StringVar(&flagMessage, "m", "", "message to send")
+	flag.BoolVar(&optionVerbose, "v", false, "verbose output")
+
 	flag.Parse()
 
 	// Set config file, if not on command line
@@ -47,8 +52,13 @@ func init() {
 		if os.Getenv(configFileEnvVar) != "" {
 			flagConfig = os.Getenv(configFileEnvVar)
 		}
-		fmt.Printf("Using config file %q\n", flagConfig)
 	}
+
+	if !optionVerbose {
+		log.SetOutput(ioutil.Discard)
+	}
+
+	log.Printf("Using config file %q\n", flagConfig)
 }
 
 func main() {
