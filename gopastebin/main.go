@@ -12,7 +12,7 @@ import (
 )
 
 // URL to the pastebin.com API
-const apiURL = "http://pastebin.com/api/api_post.php"
+const apiURL = "https://pastebin.com/api/api_post.php"
 
 // Command line options
 var (
