@@ -191,7 +191,12 @@ func gitStatus(p string) (branch, status string) {
 	out := string(bs)
 
 	branchRegex := regexp.MustCompile(`^On branch ([^\s]+)`)
-	branch = branchRegex.FindAllStringSubmatch(out, -1)[0][1]
+	res := branchRegex.FindAllStringSubmatch(out, -1)
+	if len(res) < 1 {
+		branch = CRed + "?unknown?" + Reset
+	} else {
+		branch = res[0][1]
+	}
 
 	cleanRegex := regexp.MustCompile(`nothing to commit`)
 	status = CRed + "Changes" + Reset
