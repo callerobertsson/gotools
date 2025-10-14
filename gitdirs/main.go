@@ -19,13 +19,14 @@ var (
 	onlyGitDirs    bool
 	onlyNonGitDirs bool
 	pullAll        bool
-	switchBranch   string
 	recursive      bool
 	silent         bool
+	noColors       bool
+	switchBranch   string
 )
 
 // Terminal text and color
-const (
+var (
 	Reset     = "\033[0m"
 	Bold      = "\033[1m"
 	Underline = "\033[4m"
@@ -46,6 +47,7 @@ func init() {
 	flag.BoolVar(&onlyNonGitDirs, "G", false, "Only show non-git directories")
 	flag.StringVar(&switchBranch, "b", "", "Try to switch to branch in all repos")
 	flag.BoolVar(&pullAll, "p", false, "Execute pull in all git directories")
+	flag.BoolVar(&noColors, "C", false, "Disable color output")
 	flag.BoolVar(&recursive, "r", false, "Search git dirs in subdirectories")
 	flag.BoolVar(&silent, "s", false, "Only print paths (and prefix if not -g or -G)")
 
@@ -59,10 +61,29 @@ func init() {
 	if len(flag.Args()) > 0 {
 		basePath = flag.Arg(0)
 	}
+
+	initColors()
 }
 
 func main() {
 	gitDirs(basePath)
+}
+
+func initColors() {
+	if noColors {
+		Reset = ""
+		Bold = ""
+		Underline = ""
+		Strike = ""
+		Italic = ""
+		CRed = ""
+		CGreen = ""
+		CYellow = ""
+		CBlue = ""
+		CPurple = ""
+		CCyan = ""
+		CWhite = ""
+	}
 }
 
 func gitDirs(d string) {
